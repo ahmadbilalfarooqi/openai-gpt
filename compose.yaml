@@ -10,3 +10,22 @@ services:
       - "8888:8888"
     volumes:
       - ./code:/code/
+    networks:
+      - my_api_net
+
+  backends:
+    container_name: backend
+    hostname: backend
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/code/
+
+    networks:
+      - my_api_net
+
+networks:
+  my_api_net:
+    driver: bridge
